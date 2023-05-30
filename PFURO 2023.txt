@@ -1,0 +1,51 @@
+﻿PFURO 2023 
+Research Project: 1D Initial Plasma Formation Modeling
+Objective: implement a wave-based approach to model light wave propagation in materials
+Plans:
+* June 4 - June 11 (1st - 2nd weeks)
+   * attend online classes
+   * write a finite difference scheme for EM wave propagation
+* June 18 (3rd week)
+   * a python module to model EM wave propagation
+* June 25 (4th week)
+   * implement the python module into the original 1DIPF code
+* July 2 (5th week)
+   * test the code for metals: Aluminum
+* July 9 (6th week)
+   * test the code for dielectrics: Polystyrene
+* July 16 (7th week)
+* July 23 (8th week)
+* July 30 (9th week)
+* Aug 6 (10th week)
+
+
+Numerical Method
+In this project, the explicit finite difference scheme will be implemented to model the electromagnetic wave propagation in medium. The word “explicit” means that the time-step size “dt” is strictly controlled by Courant–Friedrichs–Lewy (CFL) condition so that the wave propagation distance within a allowed time-step size cannot exceed the grid size “dx”. Any form of hyperbolic PDEs are updated explicitly such as fluid equations. The allowed wave propagation step size within a grid size “dx” is controlled by the CFL number.
+
+
+ v_\mathrm{wave} \times dt < \mathrm{CFL} \times dx 
+
+
+
+The goal of this project is to model the laser absorption phenomenon in one dimensional, which is uniquely determined by the dielectric function. Most inertial confinement fusion (ICF) codes adopt the geometric ray trace approach to model the light wave propagation in ICF plasma. The ray trace approach in 2D or 3D simulations are highly noisy in modeling the laser energy deposition, because light wave energies are dumped along their geometric paths. A wave-based approach, on the other hand, provides a smooth laser energy deposition modeling in multi-dimensional simulations, as well as the capability to model the initial plasma formation process consistently during the solid-to-plasma transition.
+
+
+The modeling equation in this project is defined below. It is the electromagnetic (EM) wave equation in nonlinear optical media.
+ \nabla^2 E - \frac{n^2}{c^2}\frac{\partial^2E}{\partial t^2} = \frac{1}{\epsilon_0 c^2}\frac{\partial^2P}{\partial t^2} 
+ ... Eq. (1)
+Here “n” the complex refractive index, “c” is the light speed, and “$\epsilon_0$” is the permittivity of free space. “P” is the nonlinear polarization, which uniquely determines all types of linear or nonlinear response in media.
+
+
+The left hand side of Eq. (1) models the light wave propagation in media, while the right hand side of Eq. (1) models the nonlinear light wave energy absorption. As EM waves propagate into a matter, molecules are polarized and oscillate along the direction of the electric field vector “E”. Depending on crystalline structure, the induced polarization can react with electric fields linearly or nonlinearly.
+
+
+ P = \epsilon_0(\chi_1E + \chi_2E^2 + ...) 
+ ... Eq. (2)
+
+
+$\chi_1$ is known as the linear susceptibility, while $\chi_2$ means for the second order susceptibility. 
+
+
+Task 1 during the first two weeks in PFURO program
+* Derive an explicit finite scheme to discretize Eq. (1) using the second-order central finite differencing in time and space. 
+* Assume a linear susceptibility in Eq. (2) for this project.
