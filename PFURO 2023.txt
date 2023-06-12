@@ -1,12 +1,15 @@
-﻿PFURO 2023 
+﻿PFURO 2023 (ZOOM: https://rochester.zoom.us/j/92332283530)
 Research Project: 1D Initial Plasma Formation Modeling
 Objective: implement a wave-based approach to model light wave propagation in materials
 Plans:
-* June 5 - June 11 (1st - 2nd weeks)
+* June 5(1st week)
    * attend online classes
-   * write a finite difference scheme for EM wave propagation
-* June 18 (3rd week)
+   * write/familiar with explicit, implicit finite difference scheme for EM wave propagation. (optional spectrum method)
+* June 12 (2nd week)
+   * attend online classes
    * a python module to model EM wave propagation
+* June 18 (3rd week)
+   * start to integrate the field solver into 1D-IPF code
 * June 25 (4th week)
    * implement the python module into the original 1D-IPF code
 * July 2 (5th week)
@@ -95,7 +98,7 @@ Task 1 during the first two weeks in PFURO program
 
 
  \nabla^2E-\frac{n^2}{c^2}\frac{\partial^2E}{\partial t^2}=0 
- … Eq. (2)
+ … Eq. (2) 
 
 
 Using the central differencing, the first-order spatial derivative, the second-order spatial derivative and the second-order time derivative are
@@ -127,13 +130,47 @@ The first bracket in Eq. (4) is required to satisfy Courant condition as stated 
 
 
 
+Nick’s Work for Week of June 5:
+
+
+I followed the derivation of Eq (4.0) by subtracting Eq (3.1) and Eq. (3.2) [Eqs. (3.1)-(3.2)] and tried to replicate it but for implicit finite scheme but I kept getting strange answers. So I went on Wikipedia/Google and found a formula so that is what I have written down. 
+
+
+From Wikipedia, we have the following implicit finite difference formula
+  
+
+Where r = k/h^2 which are constants that stem back from the derivation of the formula. I believe in our case ‘r’ would be   to satisfy Courant condition. So now we basically just replace ‘u’ with our ‘E’ and we have our implicit finite scheme
+  
+
+
+
+
+
+
+
+
+
 
 5/26/2023 Meeting
 * use Google Doc for research communication
 * give a tutorial for the IPF code in the next meeting
+
 5/30/2023 Meeting
-* not sure for virtual in APS DPP
-* begin deriving an explicit finite difference scheme to solve Eq. (2)
-* send 1D-IPF code to Nick
-* next meeting during the week of June 5
-* 27 hours driving from May 31 to June 4
+   * not sure for virtual in APS DPP
+   * begin deriving an explicit finite difference scheme to solve Eq. (2)
+   * send 1D-IPF code to Nick
+   * next meeting during the week of June 5
+   * 27 hours driving from May 31 to June 4
+
+
+06/07/2023 Meeting
+      * Pre-meeting questions/notes:
+      * How did you know to switch to a FDTD? I understand the advantages because you explained them, but I never would have thought to do this. Interested in why/how you knew what scheme to choose.
+      * Same thing as Finite Difference.
+
+         * In “Task 1” notes,  it mentions I should derive an explicit finite scheme. Should that say explicit finite time domain scheme?
+
+         * Note: Paper/research note that has example of 1D FDTD code. https://my.ece.utah.edu/~ece6340/LECTURES/lecture%2014/FDTD.pdf
+
+            * Getting information for LLE resources. VPN is important.
+            * Want to derive an implicit finite difference scheme for week of June 5
