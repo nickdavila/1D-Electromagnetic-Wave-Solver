@@ -22,6 +22,7 @@ Plans:
 
 
 Numerical Method
+Electric Field Solver
 In this project, both explicit and implicit Finite-Difference Time-Domain (FDTD) schemes will be implemented to model the electromagnetic wave propagation in medium. The word “explicit” means that the time-step size “dt” is strictly controlled by Courant–Friedrichs–Lewy (CFL) condition so that the wave propagation distance within a allowed time-step size cannot exceed the grid size “dx”. Any form of hyperbolic PDEs are updated explicitly such as Euler equations in the computational fluid dynamics (CFD). The allowed wave propagation step size within a grid size “dx” is controlled by the CFL number. Typically, CFL ~ 0.5.
 
 
@@ -142,12 +143,44 @@ From Wikipedia, we have the following implicit finite difference formula
 Where r = k/h^2 which are constants that stem back from the derivation of the formula. I believe in our case ‘r’ would be   to satisfy Courant condition. So now we basically just replace ‘u’ with our ‘E’ and we have our implicit finite scheme
   
 
+—------------------------------------------------------------------------------------------------------------------------
+To derive an implicit update, the EM wave equation in Eq. (2) is written as
 
 
+ \frac{\partial^2E}{\partial t^2}=\frac{c^2}{n^2}\nabla^2E^{n+1}
+%14cd4b00-650e-47a7-a5a9-919feef32b08 
+ … Eq. (5)
 
 
+The right-hand-side variables are evaluated at the next time-step $t^{n+1}$. To discretize Eq. (5), the second-order time derivative is replaced with Eq. (3.2) while the second-order spatial derivative is replaced with Eq. (3.1).
 
 
+ \partial_{tt}E
+=\Delta t^{-2}(E_i^{n+1}-2E_i^{n}+E_i^{n-1})
+%42ac92be-fa73-413a-be64-ac256a11462f 
+ … Eq. (5.1)
+ \partial_{xx}E=\Delta x^{-2}(E_{i+1}^{n+1}-2E_i^{n+1}+E_{i-1}^{n+1})
+%fb4042e5-a6cf-4296-8565-715eedfa026c 
+ … Eq. (5.2)
+
+
+By defining
+
+
+ r\equiv(\Delta t/\Delta x)^2\cdot(c/n)^2
+%81dce081-2c4d-4d05-80c5-7ac45218c54a 
+ … Eq. (5.3)
+
+
+Eq. (5) becomes
+
+
+ -2E_i^n+E_i^{n-1}=rE_{i+1}^{n+1}-(1+2r)E_i^{n+1}+rE_{i-1}^{n+1}
+%5aa94f4e-27e8-45bd-826c-5fd5fb9fe32e 
+ … Eq. (6)
+
+
+Laser-Matter Interaction
 
 
 
