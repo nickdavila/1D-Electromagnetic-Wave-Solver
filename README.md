@@ -1,2 +1,2 @@
-# PFURO-2023-PRIV
+# PFURO-2023
  Private repository to save my notes/work for PFURO
